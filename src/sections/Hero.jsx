@@ -75,7 +75,7 @@ const Hero = () => {
               and testing them until they do.
             </p>
             <div className="hero-links">
-              <a href="#work" className="primary-link">See my work →</a>
+              <a href="#projects" className="primary-link">See my work →</a>
               <a href="/resume/JohnCedricAcapulco_Resume.docx" className="secondary-link">Resume</a>
             </div>
             <div className="hero-stats">

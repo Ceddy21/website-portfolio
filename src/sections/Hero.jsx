@@ -16,15 +16,12 @@ const Hero = () => {
     
     const timer = setTimeout(() => {
       if (!isDeleting) {
-        // Typing
         if (text.length < currentRole.length) {
           setText(currentRole.slice(0, text.length + 1));
         } else {
-          // Pause before deleting
           setTimeout(() => setIsDeleting(true), pauseTime);
         }
       } else {
-        // Deleting
         if (text.length > 0) {
           setText(text.slice(0, -1));
         } else {
@@ -37,7 +34,6 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopIndex, roles]);
 
-  // Split text to animate closing bracket position
   const displayText = text;
   const hasText = displayText.length > 0;
 
@@ -45,7 +41,6 @@ const Hero = () => {
     <section id="hero" className="hero-section">
       <div className="hero-content">
         <div className="hero-about-grid">
-          {/* COLUMN 1 - Image */}
           <div className="hero-image-col">
             <div className="hero-image-container">
               <img 
@@ -56,7 +51,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* COLUMN 2 - Hero Info */}
           <div className="hero-info-col">
             <div className="hero-badge">
               <span className="badge-dot"></span>
@@ -102,7 +96,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* COLUMN 3 - About */}
           <div className="about-col">
             <div className="about-label">01. About</div>
             <h2 className="about-title">

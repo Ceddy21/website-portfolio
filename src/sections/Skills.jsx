@@ -63,7 +63,6 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section" ref={sectionRef}>
       <div className="skills-container">
-        {/* Header */}
         <div className="skills-header">
           <span className={`skills-label ${isVisible ? 'fade-in-up' : 'fade-out-down'}`}>
             02. Skills
@@ -73,7 +72,6 @@ const Skills = () => {
           </h2>
         </div>
 
-        {/* Skills Grid */}
         <div className="skills-grid">
           {skillGroups.map((group, i) => (
             <div 
@@ -99,7 +97,6 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Soft Skills */}
         <div 
           className={`soft-skills ${isVisible ? 'fade-in-up' : 'fade-out-down'}`}
           style={{ animationDelay: isVisible ? '0.5s' : '0s' }}

@@ -34,11 +34,8 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects-section" ref={sectionRef}>
-      {/* Subtle background glow */}
       <div className="projects-glow"></div>
-      
       <div className="section-gradient-top"></div>
-
       <div className="projects-header">
         <span className={`projects-label ${isVisible ? 'fade-in-up' : 'fade-out-down'}`}>
           04. Work

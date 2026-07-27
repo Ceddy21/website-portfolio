@@ -110,7 +110,6 @@ const ProjectCarousel = ({ projects }) => {
   };
 
   const handleCardClick = (project, e) => {
-    // CRITICAL: Prevent ALL default behavior and stop propagation
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -122,7 +121,7 @@ const ProjectCarousel = ({ projects }) => {
       setImageIndex(0);
       setModalOpen(true);
     }
-    return false; // Additional prevent default
+    return false;
   };
 
   const handleModalClose = (e) => {
@@ -158,7 +157,6 @@ const ProjectCarousel = ({ projects }) => {
     }
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && modalOpen) {
@@ -187,12 +185,6 @@ const ProjectCarousel = ({ projects }) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [modalOpen]);
 
-  // Prevent/allow body scroll when modal opens/closes.
-  // No position:fixed / top / scrollTo trick — that approach resets native
-  // scroll to 0 the instant position:fixed is removed, then jumps it back
-  // via JS, which is what caused the visible jump on close. Just toggling
-  // overflow never touches the scroll position at all, so there's nothing
-  // to restore and nothing to jump.
   useEffect(() => {
     if (modalOpen) {
       document.body.style.overflow = 'hidden';
@@ -345,7 +337,6 @@ const ProjectCarousel = ({ projects }) => {
           </button>
         </div>
 
-        {/* Modal Body */}
         <div style={{
           padding: '28px 32px',
           maxHeight: 'calc(90vh - 70px)',
@@ -402,7 +393,6 @@ const ProjectCarousel = ({ projects }) => {
             {selectedProject.description}
           </p>
 
-          {/* Screenshots Section */}
           {selectedProject.screenshots && selectedProject.screenshots.length > 0 && (
             <div style={{ marginBottom: '28px' }}>
               <h3 style={{
@@ -579,7 +569,6 @@ const ProjectCarousel = ({ projects }) => {
             </div>
           )}
 
-          {/* Contributions Section */}
           {selectedProject.contributions && selectedProject.contributions.length > 0 && (
             <div style={{ marginBottom: '28px' }}>
               <h3 style={{
@@ -628,7 +617,6 @@ const ProjectCarousel = ({ projects }) => {
             </div>
           )}
 
-          {/* Tech Stack */}
           {selectedProject.tech && selectedProject.tech.length > 0 && (
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{
@@ -899,7 +887,7 @@ const ProjectCarousel = ({ projects }) => {
                               justifyContent: 'center',
                               marginTop: '4px'
                             }}>
-                              {(project.tech || ['🚀', '✨', '🔜']).slice(0, 3).map((tech, idx) => (
+                              {(project.tech).slice(0, 3).map((tech, idx) => (
                                 <span key={idx} style={{
                                   background: 'rgba(255, 255, 255, 0.05)',
                                   color: '#9ca3af',

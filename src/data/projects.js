@@ -96,12 +96,11 @@ export const projects = [
     github: "https://github.com/alqzdave/TLPH",
     isPlaceholder: false
   },
-  // Placeholder cards - "Coming Soon"
   {
     id: "coming-soon-1",
     title: "Coming Soon",
     description: "A new project is currently in development. Stay tuned for updates!",
-    tech: ["🚀", "✨", "🔜"],
+    tech: ["TBA", "TBA", "TBA"],
     contributions: [],
     screenshots: [],
     github: "",
@@ -111,7 +110,7 @@ export const projects = [
     id: "coming-soon-2",
     title: "Coming Soon",
     description: "Another exciting project is on the way. More details coming soon!",
-    tech: ["💡", "🎯", "🌟"],
+    tech: ["TBA", "TBA", "TBA"],
     contributions: [],
     screenshots: [],
     github: "",

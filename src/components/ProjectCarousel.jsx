@@ -227,6 +227,7 @@ const ProjectCarousel = ({ projects }) => {
       }}
       onClick={handleModalClose}
       onMouseDown={(e) => e.stopPropagation()}
+      role="presentation"
     >
       <div
         style={{
@@ -245,6 +246,9 @@ const ProjectCarousel = ({ projects }) => {
         }}
         onClick={(e) => e.stopPropagation()}
         onMouseDown={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
       >
         {/* Modal Header */}
         <div style={{
@@ -269,6 +273,9 @@ const ProjectCarousel = ({ projects }) => {
               gap: '8px'
             }}>
               <div
+                role="button"
+                aria-label="Close project details"
+                tabIndex={0}
                 style={{
                   width: '13px',
                   height: '13px',
@@ -278,14 +285,19 @@ const ProjectCarousel = ({ projects }) => {
                   transition: 'opacity 0.2s'
                 }}
                 onClick={handleModalClose}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handleModalClose(e);
+                  }
+                }}
               />
-              <div style={{
+              <div aria-hidden="true" style={{
                 width: '13px',
                 height: '13px',
                 borderRadius: '50%',
                 background: '#ffbd2e'
               }} />
-              <div style={{
+              <div aria-hidden="true" style={{
                 width: '13px',
                 height: '13px',
                 borderRadius: '50%',
@@ -305,6 +317,7 @@ const ProjectCarousel = ({ projects }) => {
           </div>
           <button
             onClick={handleModalClose}
+            aria-label="Close project details"
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               border: 'none',
@@ -338,21 +351,53 @@ const ProjectCarousel = ({ projects }) => {
           maxHeight: 'calc(90vh - 70px)',
           overflowY: 'auto'
         }}>
-          <h2 style={{
-            color: '#f3f4f6',
-            fontSize: '28px',
-            fontWeight: 700,
-            marginBottom: '4px',
-            fontFamily: 'Space Grotesk, sans-serif',
-            letterSpacing: '-0.02em'
-          }}>
+          {selectedProject.role && (
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '6px',
+              marginBottom: '10px'
+            }}>
+              {(Array.isArray(selectedProject.role) ? selectedProject.role : [selectedProject.role]).map((role, index) => (
+                <span
+                  key={index}
+                  style={{
+                    display: 'inline-block',
+                    background: 'rgba(74, 222, 128, 0.1)',
+                    color: '#4ade80',
+                    padding: '3px 12px',
+                    borderRadius: '999px',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    letterSpacing: '0.3px',
+                    border: '1px solid rgba(74, 222, 128, 0.15)',
+                    fontFamily: 'JetBrains Mono, monospace'
+                  }}
+                >
+                  {role}
+                </span>
+              ))}
+            </div>
+          )}
+          <h2
+            id="project-modal-title"
+            style={{
+              color: '#f3f4f6',
+              fontSize: '28px',
+              fontWeight: 700,
+              marginBottom: '4px',
+              fontFamily: 'Space Grotesk, sans-serif',
+              letterSpacing: '-0.02em'
+            }}
+          >
             {selectedProject.title}
           </h2>
           <p style={{
             color: '#9ca3af',
             fontSize: '14px',
             marginBottom: '24px',
-            lineHeight: '1.6'
+            lineHeight: '1.6',
+            marginTop: '4px'
           }}>
             {selectedProject.description}
           </p>

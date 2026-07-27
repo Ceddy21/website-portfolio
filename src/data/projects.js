@@ -3,6 +3,7 @@ export const projects = [
     id: "agridate",
     logo: "/logo/agridate.png",
     title: "AgriDate",
+    role: ["Full Stack Developer", "QA Tester"],
     description:
       "A Solar-Powered IoT Enabled Crop Planning and Planting Dates Using Random Forest Regression",
     tech: [
@@ -20,11 +21,10 @@ export const projects = [
       "Hostinger",
     ],
     contributions: [
-      "Built the frontend dashboard with React and Tailwind CSS",
-      "Integrated Django REST API for crop prediction models",
-      "Connected Firebase for real-time IoT sensor data",
-      "Implemented responsive design for mobile and desktop",
-      "Developed data visualization charts for crop analysis"
+      "Developed a full-stack IoT platform for AgriDate using Django, Firebase, and Tailwind CSS with custom HTML/CSS/JavaScript, delivering a responsive and interactive web application for real-time sensor data monitoring",
+      "Integrated a Random Forest Regression model into the Django back-end, enabling predictive agricultural insights based on live IoT sensor inputs",
+      "Conducted manual QA testing across multiple devices and browsers, resolving UI/UX issues to ensure a seamless user experience",
+      "Deployed the application on Hostinger with Cloudinary API, verifying production readiness and presenting a polished system for final capstone defense",
     ],
     screenshots: [
       "/images/agridate/agridate1.png",
@@ -38,6 +38,7 @@ export const projects = [
     id: "portfolio",
     logo: "/logo/myLogo.png",
     title: "Portfolio Website",
+    role: "Frontend Developer",
     description:
       "A modern portfolio showcasing my frontend development and QA projects.",
     tech: [
@@ -48,39 +49,49 @@ export const projects = [
       "Formspree",
     ],
     contributions: [
-      "Designed and developed the entire portfolio from scratch",
-      "Implemented smooth animations and transitions",
+      "Developed a responsive portfolio website using React, Tailwind CSS, and JavaScript, delivering a modern, interactive user interface",
+      "Integrated Formspree API into the contact form, enabling seamless email communication directly from the website",
       "Created a responsive carousel for project showcase",
-      "Optimized performance and accessibility",
-      "Deployed and maintained the live website"
+      "Deployed the application on Vercel, ensuring public accessibility and production-ready performance"
     ],
     screenshots: [
       "/images/portfolio/portfolio1.png",
       "/images/portfolio/portfolio2.png",
     ],
-    github: "https://github.com/yourusername/portfolio",
+    github: "https://github.com/Ceddy21/website-portfolio",
     isPlaceholder: false
   },
   {
     id: "denr",
     logo: "/logo/seal.png",
     title: "DENR System",
+    role: ["Frontend Developer", "QA Tester"],
     description:
-      "A web application developed for DENR to streamline data management.",
+      "Mocked DENR portal system",
     tech: [
-      "React",
-      "Firebase"
+      "Flask",
+      "Python",
+      "HTML",
+      "CSS",
+      "Tailwind",
+      "JavaScript",
+      "Firebase",
+      "Cloudinary",
+      "Xendit",
     ],
     contributions: [
-      "Built the frontend interface with React",
-      "Set up Firebase Firestore for data storage",
-      "Implemented user authentication and authorization",
-      "Created data entry and reporting features",
-      "Designed a clean and intuitive UI/UX"
+      "Developed responsive front-end components for DENR using HTML, CSS, Tailwind, Bootstrap, and JavaScript, delivering a polished and intuitive user interface",
+      "Performed manual QA testing across multiple browsers and devices, identifying UI inconsistencies and resolving errors to ensure cross-platform compatibility",
+      "Collaborated in wireframe creation for the entire system, contributing to the initial design phase and ensuring alignment with user requirements",
     ],
     screenshots: [
-      "/screenshots/denr1.png",
-      "/screenshots/denr2.png"
+      "/images/denr/denr1.png",
+      "/images/denr/denr2.png",
+      "/images/denr/denr3.png",
+      "/images/denr/denr4.png",
+      "/images/denr/denr5.png",
+      "/images/denr/denr6.png",
+      "/images/denr/denr7.png",
     ],
     github: "https://github.com/alqzdave/TLPH",
     isPlaceholder: false

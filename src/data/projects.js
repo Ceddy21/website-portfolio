@@ -31,7 +31,7 @@ export const projects = [
       "/images/agridate/agridate2.png",
       "/images/agridate/agridate3.png",
     ],
-    github: "https://github.com/Ceddy21/AgriiDate",
+    github: "https://github.com/Ceddy21/AgriDate",
     isPlaceholder: false
   },
   {

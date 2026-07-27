@@ -116,7 +116,7 @@ const Hero = () => {
               <div className="tools-list">
                 <span>React</span>
                 <span>Tailwind</span>
-                <span>Testing</span>
+                <span>Frontend Development</span>
               </div>
             </div>
           </div>

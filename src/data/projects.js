@@ -32,6 +32,7 @@ export const projects = [
       "/images/agridate/agridate3.png",
     ],
     github: "https://github.com/Ceddy21/AgriDate",
+    live: " ",
     isPlaceholder: false
   },
   {
@@ -59,6 +60,7 @@ export const projects = [
       "/images/portfolio/portfolio2.png",
     ],
     github: "https://github.com/Ceddy21/website-portfolio",
+    live: "https://website-portfolio-cedric.vercel.app/",
     isPlaceholder: false
   },
   {
@@ -94,26 +96,89 @@ export const projects = [
       "/images/denr/denr7.png",
     ],
     github: "https://github.com/alqzdave/TLPH",
+    live: "",
     isPlaceholder: false
   },
   {
-    id: "coming-soon-1",
-    title: "Coming Soon",
-    description: "A new project is currently in development. Stay tuned for updates!",
-    tech: ["TBA", "TBA", "TBA"],
-    contributions: [],
-    screenshots: [],
-    github: "",
-    isPlaceholder: true
-  },
+    id: "nota",
+    logo: "/logo/nota.png",
+    title: "Nota — Notes App",
+    role: ["Full Stack Developer"],
+    description:
+      "A note web application",
+    tech: [
+      "React",
+      "React Router",
+      "Tailwind CSS",
+      "Axios",
+      "React Icons",
+      "React Hot Toast",
+      "Node.js",
+      "Express.js",
+      "MongoDB Atlas",
+      "Mongoose",
+      "JWT",
+      "Passport.js",
+      "bcryptjs",
+      "Helmet",
+      "CORS",
+      "Rate Limit",
+      "Gmail API",
+      "nodemailer",
+      "Cloudinary",
+      "Multer",
+      "Vercel",
+      "Render",
+    ],
+  contributions: [
+    "Built a full-stack notes application with Google OAuth 2.0 authentication using Passport.js for secure user sign-in",
+    "Implemented JWT-based authentication with access and refresh tokens, using bcryptjs for password hashing",
+    "Integrated Cloudinary and Multer for image uploads, enabling users to attach media to notes with optimized CDN delivery",
+    "Connected Gmail API with nodemailer for sending email notifications, including password reset links and sharing alerts",
+    "Designed MongoDB Atlas schemas with Mongoose for users, notes, and collaborative sharing features",
+    "Added security middleware including Helmet, CORS, and express-rate-limit for production-grade protection",
+    "Deployed the React frontend on Vercel and Express backend on Render with MongoDB Atlas for cloud database",
+    "Used React Context API for global state management and Axios for HTTP requests with interceptors",
+  ],
+  screenshots: [
+    "/images/nota/nota1.png",
+    "/images/nota/nota2.png",
+    "/images/nota/nota3.png",
+    "/images/nota/nota4.png",
+    "/images/nota/nota5.png",
+  ],
+  github: "https://github.com/Ceddy21/mern-note-app",
+  live: "https://mern-note-app-brown.vercel.app/",
+  isPlaceholder: false
+},
   {
-    id: "coming-soon-2",
-    title: "Coming Soon",
-    description: "Another exciting project is on the way. More details coming soon!",
-    tech: ["TBA", "TBA", "TBA"],
-    contributions: [],
-    screenshots: [],
-    github: "",
-    isPlaceholder: true
-  }
+    id: "snake",
+    logo: "/logo/snake.png",
+    title: "Pixel Snake",
+    role: "Game Developer",
+    description:
+      "A classic Snake game developed with HTML, CSS, Tailwind CSS, and Vanilla JavaScript — featuring pixel-perfect design and smooth gameplay.",
+    tech: [
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+      "Vanilla JavaScript",
+      "Local Storage",
+    ],
+    contributions: [
+      "Built a fully functional Snake game using Vanilla JavaScript with keyboard controls",
+      "Designed a pixel-perfect retro-inspired UI using Tailwind CSS and custom styles",
+      "Implemented game mechanics including: snake movement, food spawning, score tracking, and collision detection",
+      "Added high score tracking using Local Storage for persistent data",
+      "Created responsive design for both desktop and mobile devices",
+      "Implemented touch controls for mobile users with swipe gestures",
+    ],
+    screenshots: [
+      "/images/snake/snake1.png",
+      "/images/snake/snake2.png",
+    ],
+    github: "https://github.com/Ceddy21/snake",
+    live: "https://snakegame-sepia-seven.vercel.app/",
+    isPlaceholder: false
+  },
 ];

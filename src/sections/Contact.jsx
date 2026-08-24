@@ -1,15 +1,47 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
 const Contact = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
   const [state, handleSubmit] = useForm('maqrawae');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL;
   const PHONE_NUMBER = import.meta.env.VITE_PHONE_NUMBER;
 
   if (state.succeeded) {
     return (
-      <section id="contact" className="contact-section">
+      <section 
+        id="contact" 
+        className={`contact-section section-reveal visible`} 
+        ref={sectionRef}
+      >
         <div className="contact-content">
           <span className="contact-label">04. Contact</span>
           <h2 className="contact-title">
@@ -32,9 +64,13 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="contact-section">
-      <div className="contact-content">
-        <span className="contact-label">04. Contact</span>
+    <section 
+      id="contact" 
+      className={`contact-section section-reveal ${isVisible ? 'visible' : ''}`} 
+      ref={sectionRef}
+    >
+      <div className={`contact-content stagger-children ${isVisible ? 'visible' : ''}`}>
+        <span className="contact-label">Contact</span>
         <h2 className="contact-title">
           Let's build something<br />
           <span className="contact-highlight">that actually works</span>

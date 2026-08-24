@@ -50,6 +50,7 @@ const ProjectCarousel = ({ projects }) => {
 
   const handleMouseDown = (e) => {
     if (e.button !== 0) return;
+    if (modalOpen) return;
     setIsDragging(true);
     hasMovedRef.current = false;
     setStartX(e.pageX - containerRef.current.offsetLeft);
@@ -57,6 +58,7 @@ const ProjectCarousel = ({ projects }) => {
   };
 
   const handleTouchStart = (e) => {
+    if (modalOpen) return;
     setIsDragging(true);
     hasMovedRef.current = false;
     setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
@@ -64,6 +66,7 @@ const ProjectCarousel = ({ projects }) => {
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
+    if (modalOpen) return;
     e.preventDefault();
     const x = e.pageX - containerRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
@@ -78,6 +81,7 @@ const ProjectCarousel = ({ projects }) => {
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
+    if (modalOpen) return;
     e.preventDefault();
     const x = e.touches[0].pageX - containerRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
@@ -198,84 +202,27 @@ const ProjectCarousel = ({ projects }) => {
 
   const modalContent = modalOpen && selectedProject && !selectedProject.isPlaceholder ? (
     <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100vw',
-        height: '100vh',
-        background: 'rgba(0, 0, 0, 0.92)',
-        backdropFilter: 'blur(20px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 999999,
-        padding: '20px',
-        animation: 'fadeIn 0.3s ease',
-        pointerEvents: 'auto',
-        cursor: 'default'
-      }}
+      className="modal-overlay"
       onClick={handleModalClose}
       onMouseDown={(e) => e.stopPropagation()}
       role="presentation"
     >
       <div
-        style={{
-          background: 'linear-gradient(145deg, #12121e, #1a1a2e)',
-          borderRadius: '16px',
-          maxWidth: '750px',
-          width: '100%',
-          maxHeight: '90vh',
-          overflow: 'hidden',
-          position: 'relative',
-          boxShadow: '0 0 100px rgba(124, 109, 240, 0.1), 0 30px 80px rgba(0, 0, 0, 0.8)',
-          border: '1px solid rgba(124, 109, 240, 0.15)',
-          animation: 'modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-          pointerEvents: 'auto',
-          cursor: 'default'
-        }}
+        className="modal-card"
         onClick={(e) => e.stopPropagation()}
         onMouseDown={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"
       >
-        {/* Modal Header */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '16px 24px',
-          background: 'rgba(255, 255, 255, 0.02)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1,
-          backdropFilter: 'blur(8px)'
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}>
-            <div style={{
-              display: 'flex',
-              gap: '8px'
-            }}>
+        <div className="modal-header">
+          <div className="modal-header-left">
+            <div className="modal-window-controls">
               <div
                 role="button"
                 aria-label="Close project details"
                 tabIndex={0}
-                style={{
-                  width: '13px',
-                  height: '13px',
-                  borderRadius: '50%',
-                  background: '#ff5f56',
-                  cursor: 'pointer',
-                  transition: 'opacity 0.2s'
-                }}
+                className="modal-window-btn modal-window-close"
                 onClick={handleModalClose}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -283,222 +230,65 @@ const ProjectCarousel = ({ projects }) => {
                   }
                 }}
               />
-              <div aria-hidden="true" style={{
-                width: '13px',
-                height: '13px',
-                borderRadius: '50%',
-                background: '#ffbd2e'
-              }} />
-              <div aria-hidden="true" style={{
-                width: '13px',
-                height: '13px',
-                borderRadius: '50%',
-                background: '#27c93f'
-              }} />
+              <div aria-hidden="true" className="modal-window-btn modal-window-minimize" />
+              <div aria-hidden="true" className="modal-window-btn modal-window-maximize" />
             </div>
-            <span style={{
-              color: '#6b7280',
-              fontSize: '12px',
-              fontWeight: 500,
-              letterSpacing: '0.3px',
-              fontFamily: 'JetBrains Mono, monospace'
-            }}>
-              <span style={{ color: '#60a5fa' }}>project</span>
-              <span style={{ color: '#6b7280' }}>/{selectedProject.id || 'details'}</span>
+            <span className="modal-header-path">
+              <span className="modal-path-project">project</span>
+              <span className="modal-path-name">/{selectedProject.id || 'details'}</span>
             </span>
           </div>
           <button
             onClick={handleModalClose}
             aria-label="Close project details"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: 'none',
-              color: '#9ca3af',
-              width: '30px',
-              height: '30px',
-              borderRadius: '6px',
-              fontSize: '18px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-              e.currentTarget.style.color = '#f3f4f6';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-              e.currentTarget.style.color = '#9ca3af';
-            }}
+            className="modal-close-btn"
           >
             ✕
           </button>
         </div>
 
-        <div style={{
-          padding: '28px 32px',
-          maxHeight: 'calc(90vh - 70px)',
-          overflowY: 'auto'
-        }}>
+        <div className="modal-body">
           {selectedProject.role && (
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '6px',
-              marginBottom: '10px'
-            }}>
+            <div className="modal-role-tags">
               {(Array.isArray(selectedProject.role) ? selectedProject.role : [selectedProject.role]).map((role, index) => (
-                <span
-                  key={index}
-                  style={{
-                    display: 'inline-block',
-                    background: 'rgba(74, 222, 128, 0.1)',
-                    color: '#4ade80',
-                    padding: '3px 12px',
-                    borderRadius: '999px',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    letterSpacing: '0.3px',
-                    border: '1px solid rgba(74, 222, 128, 0.15)',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                >
+                <span key={index} className="modal-role-tag">
                   {role}
                 </span>
               ))}
             </div>
           )}
-          <h2
-            id="project-modal-title"
-            style={{
-              color: '#f3f4f6',
-              fontSize: '28px',
-              fontWeight: 700,
-              marginBottom: '4px',
-              fontFamily: 'Space Grotesk, sans-serif',
-              letterSpacing: '-0.02em'
-            }}
-          >
+          <h2 id="project-modal-title" className="modal-title">
             {selectedProject.title}
           </h2>
-          <p style={{
-            color: '#9ca3af',
-            fontSize: '14px',
-            marginBottom: '24px',
-            lineHeight: '1.6',
-            marginTop: '4px'
-          }}>
+          <p className="modal-description">
             {selectedProject.description}
           </p>
 
           {selectedProject.screenshots && selectedProject.screenshots.length > 0 && (
-            <div style={{ marginBottom: '28px' }}>
-              <h3 style={{
-                color: '#d1d5db',
-                fontSize: '14px',
-                fontWeight: 600,
-                marginBottom: '12px',
-                fontFamily: 'Space Grotesk, sans-serif',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '8px'
-              }}>
-                <span>
-                  <span style={{ color: '#7c6df0' }}>└─</span> Screenshots
-                </span>
-                <span style={{
-                  fontSize: '12px',
-                  color: '#6b7280',
-                  fontWeight: 400
-                }}>
+            <div className="modal-screenshots-section">
+              <h3 className="modal-screenshots-header">
+                <span><span className="modal-accent">└─</span> Screenshots</span>
+                <span className="modal-screenshots-counter">
                   {imageIndex + 1} - {Math.min(imageIndex + 2, selectedProject.screenshots.length)} of {selectedProject.screenshots.length}
                 </span>
               </h3>
 
-              <div style={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px'
-              }}>
+              <div className="modal-screenshots-wrapper">
                 <button
                   onClick={handlePrevImage}
-                  style={{
-                    position: 'absolute',
-                    left: '-14px',
-                    zIndex: 10,
-                    background: 'rgba(18, 18, 30, 0.9)',
-                    backdropFilter: 'blur(4px)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
-                    borderRadius: '50%',
-                    width: '36px',
-                    height: '36px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#d1d5db',
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    padding: 0
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(124, 109, 240, 0.2)';
-                    e.currentTarget.style.borderColor = 'rgba(124, 109, 240, 0.3)';
-                    e.currentTarget.style.color = '#f3f4f6';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(18, 18, 30, 0.9)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
-                    e.currentTarget.style.color = '#d1d5db';
-                  }}
+                  className="modal-nav-btn modal-nav-prev"
                   disabled={imageIndex === 0}
                 >
                   ‹
                 </button>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '12px',
-                  width: '100%',
-                  overflow: 'hidden',
-                  padding: '4px 0'
-                }}>
+                <div className="modal-screenshot-grid">
                   {selectedProject.screenshots.slice(imageIndex, imageIndex + 2).map((screenshot, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        borderRadius: '8px',
-                        overflow: 'hidden',
-                        border: '1px solid rgba(255, 255, 255, 0.06)',
-                        background: 'rgba(0, 0, 0, 0.2)',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        position: 'relative',
-                        animation: 'fadeIn 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = 'rgba(124, 109, 240, 0.3)';
-                        e.currentTarget.style.transform = 'scale(1.02)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    >
+                    <div key={index} className="modal-screenshot-item">
                       <img
                         src={screenshot}
                         alt={selectedProject.title + ' screenshot ' + (imageIndex + index + 1)}
-                        style={{
-                          width: '100%',
-                          height: '200px',
-                          objectFit: 'cover',
-                          display: 'block'
-                        }}
+                        loading="lazy"
                       />
                     </div>
                   ))}
@@ -506,35 +296,7 @@ const ProjectCarousel = ({ projects }) => {
 
                 <button
                   onClick={handleNextImage}
-                  style={{
-                    position: 'absolute',
-                    right: '-14px',
-                    zIndex: 10,
-                    background: 'rgba(18, 18, 30, 0.9)',
-                    backdropFilter: 'blur(4px)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
-                    borderRadius: '50%',
-                    width: '36px',
-                    height: '36px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#d1d5db',
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    padding: 0
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(124, 109, 240, 0.2)';
-                    e.currentTarget.style.borderColor = 'rgba(124, 109, 240, 0.3)';
-                    e.currentTarget.style.color = '#f3f4f6';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(18, 18, 30, 0.9)';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
-                    e.currentTarget.style.color = '#d1d5db';
-                  }}
+                  className="modal-nav-btn modal-nav-next"
                   disabled={imageIndex + 2 >= selectedProject.screenshots.length}
                 >
                   ›
@@ -542,26 +304,12 @@ const ProjectCarousel = ({ projects }) => {
               </div>
 
               {selectedProject.screenshots.length > 2 && (
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  marginTop: '12px'
-                }}>
+                <div className="modal-dots">
                   {Array.from({ length: Math.ceil(selectedProject.screenshots.length / 2) }).map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setImageIndex(i * 2)}
-                      style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: Math.floor(imageIndex / 2) === i ? '#7c6df0' : 'rgba(255, 255, 255, 0.1)',
-                        border: 'none',
-                        padding: 0,
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease'
-                      }}
+                      className={`modal-dot ${Math.floor(imageIndex / 2) === i ? 'active' : ''}`}
                     />
                   ))}
                 </div>
@@ -570,46 +318,14 @@ const ProjectCarousel = ({ projects }) => {
           )}
 
           {selectedProject.contributions && selectedProject.contributions.length > 0 && (
-            <div style={{ marginBottom: '28px' }}>
-              <h3 style={{
-                color: '#d1d5db',
-                fontSize: '14px',
-                fontWeight: 600,
-                marginBottom: '10px',
-                fontFamily: 'Space Grotesk, sans-serif',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <span style={{ color: '#7c6df0' }}>└─</span> My Contributions
+            <div className="modal-contributions">
+              <h3 className="modal-contributions-header">
+                <span className="modal-accent">└─</span> My Contributions
               </h3>
-              <ul style={{
-                listStyle: 'none',
-                padding: 0,
-                margin: 0
-              }}>
+              <ul className="modal-contributions-list">
                 {selectedProject.contributions.map((contribution, index) => (
-                  <li
-                    key={index}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '10px',
-                      padding: '6px 0',
-                      color: '#d1d5db',
-                      fontSize: '14px',
-                      lineHeight: '1.6',
-                      borderBottom: index < selectedProject.contributions.length - 1 ? '1px solid rgba(255, 255, 255, 0.03)' : 'none'
-                    }}
-                  >
-                    <span style={{
-                      color: '#4ade80',
-                      fontSize: '16px',
-                      marginTop: '2px',
-                      flexShrink: 0
-                    }}>
-                      ▸
-                    </span>
+                  <li key={index} className="modal-contribution-item">
+                    <span className="modal-contribution-bullet">▸</span>
                     {contribution}
                   </li>
                 ))}
@@ -618,38 +334,13 @@ const ProjectCarousel = ({ projects }) => {
           )}
 
           {selectedProject.tech && selectedProject.tech.length > 0 && (
-            <div style={{ marginBottom: '24px' }}>
-              <h3 style={{
-                color: '#d1d5db',
-                fontSize: '14px',
-                fontWeight: 600,
-                marginBottom: '10px',
-                fontFamily: 'Space Grotesk, sans-serif',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <span style={{ color: '#7c6df0' }}>└─</span> Tech Stack
+            <div className="modal-tech-section">
+              <h3 className="modal-tech-header">
+                <span className="modal-accent">└─</span> Tech Stack
               </h3>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px'
-              }}>
+              <div className="modal-tech-tags">
                 {selectedProject.tech.map((tech, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      background: 'rgba(124, 109, 240, 0.1)',
-                      color: '#a78bfa',
-                      padding: '4px 14px',
-                      borderRadius: '6px',
-                      fontSize: '12px',
-                      border: '1px solid rgba(124, 109, 240, 0.08)',
-                      fontFamily: 'JetBrains Mono, monospace',
-                      fontWeight: 500
-                    }}
-                  >
+                  <span key={index} className="modal-tech-tag">
                     {tech}
                   </span>
                 ))}
@@ -657,61 +348,46 @@ const ProjectCarousel = ({ projects }) => {
             </div>
           )}
 
-          {/* GitHub Link */}
-          {selectedProject.github && (
-            <div>
+          {/* ============================================
+              BUTTONS: GitHub + Live Demo
+              ============================================ */}
+          <div className="modal-buttons-wrapper">
+            {selectedProject.github && (
               <a
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '10px 24px',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  color: '#60a5fa',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  border: '1px solid rgba(96, 165, 250, 0.08)',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(96, 165, 250, 0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(96, 165, 250, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                  e.currentTarget.style.borderColor = 'rgba(96, 165, 250, 0.08)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                className="modal-github-link"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                 </svg>
                 View on GitHub
               </a>
-            </div>
-          )}
+            )}
 
-          {/* Footer */}
-          <div style={{
-            marginTop: '28px',
-            paddingTop: '16px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.03)',
-            color: '#374151',
-            fontSize: '11px',
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}>
+            {selectedProject.live && (
+              <a
+                href={selectedProject.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modal-live-link"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+                Live Demo
+              </a>
+            )}
+          </div>
+
+          <div className="modal-footer">
             <span>
-              <span style={{ color: '#4ade80' }}>✦</span> Press <span style={{ color: '#fbbf24' }}>ESC</span> to close
+              <span className="modal-footer-accent">✦</span> Press <span className="modal-footer-key">ESC</span> to close
             </span>
-            <span style={{ color: '#4b5563' }}>
+            <span className="modal-footer-time">
               {new Date().toLocaleTimeString()}
             </span>
           </div>
@@ -720,7 +396,6 @@ const ProjectCarousel = ({ projects }) => {
     </div>
   ) : null;
 
-  // CRITICAL: Prevent all clicks from navigating
   const handleContainerClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -749,7 +424,10 @@ const ProjectCarousel = ({ projects }) => {
           padding: '10px 0',
           background: '#1a1a2e',
           borderRadius: '16px',
-          boxShadow: 'inset 0 0 60px rgba(124, 109, 240, 0.05)'
+          boxShadow: 'inset 0 0 60px rgba(124, 109, 240, 0.05)',
+          pointerEvents: modalOpen ? 'none' : 'auto',
+          opacity: modalOpen ? 0.5 : 1,
+          transition: 'opacity 0.3s ease',
         }}
         role="region"
         aria-label="Project carousel"
@@ -887,7 +565,7 @@ const ProjectCarousel = ({ projects }) => {
                               justifyContent: 'center',
                               marginTop: '4px'
                             }}>
-                              {(project.tech).slice(0, 3).map((tech, idx) => (
+                              {(project.tech || []).slice(0, 3).map((tech, idx) => (
                                 <span key={idx} style={{
                                   background: 'rgba(255, 255, 255, 0.05)',
                                   color: '#9ca3af',
@@ -945,6 +623,7 @@ const ProjectCarousel = ({ projects }) => {
                               objectFit: 'contain',
                               transition: 'all 0.3s ease'
                             }}
+                            loading="lazy"
                           />
                         </div>
                         <div style={{
@@ -1063,14 +742,525 @@ const ProjectCarousel = ({ projects }) => {
           }
         }
 
-        @keyframes cursorBlink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-
         button:disabled {
           opacity: 0.3;
           cursor: not-allowed;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.92);
+          backdrop-filter: blur(20px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 999999;
+          padding: 20px;
+          animation: modalFadeIn 0.4s ease;
+          pointer-events: auto;
+          cursor: default;
+        }
+
+        .modal-overlay::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(ellipse at center, rgba(124, 109, 240, 0.05), transparent 60%);
+          pointer-events: none;
+        }
+
+        .modal-card {
+          background: linear-gradient(145deg, rgba(18, 18, 30, 0.98), rgba(26, 26, 46, 0.98));
+          backdrop-filter: blur(20px);
+          border-radius: 16px;
+          max-width: 750px;
+          width: 100%;
+          max-height: 90vh;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 0 80px rgba(124, 109, 240, 0.08), 0 30px 80px rgba(0, 0, 0, 0.8);
+          border: 1px solid rgba(124, 109, 240, 0.12);
+          animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          pointer-events: auto;
+          cursor: default;
+        }
+
+        .modal-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #7c6df0, transparent);
+          opacity: 0.5;
+        }
+
+        @keyframes modalFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 24px;
+          background: rgba(255, 255, 255, 0.02);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          position: sticky;
+          top: 0;
+          z-index: 1;
+          backdrop-filter: blur(8px);
+        }
+
+        .modal-header-left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .modal-window-controls {
+          display: flex;
+          gap: 8px;
+        }
+
+        .modal-window-btn {
+          width: 13px;
+          height: 13px;
+          border-radius: 50%;
+          transition: opacity 0.2s;
+        }
+
+        .modal-window-close {
+          background: #ff5f56;
+          cursor: pointer;
+        }
+
+        .modal-window-close:hover {
+          opacity: 0.8;
+        }
+
+        .modal-window-minimize {
+          background: #ffbd2e;
+        }
+
+        .modal-window-maximize {
+          background: #27c93f;
+        }
+
+        .modal-header-path {
+          color: #6b7280;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        .modal-path-project {
+          color: #60a5fa;
+        }
+
+        .modal-path-name {
+          color: #6b7280;
+        }
+
+        .modal-close-btn {
+          background: rgba(255, 255, 255, 0.05);
+          border: none;
+          color: #9ca3af;
+          width: 30px;
+          height: 30px;
+          border-radius: 6px;
+          font-size: 18px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .modal-close-btn:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #f3f4f6;
+        }
+
+        .modal-body {
+          padding: 28px 32px;
+          max-height: calc(90vh - 70px);
+          overflow-y: auto;
+        }
+
+        .modal-role-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 10px;
+        }
+
+        .modal-role-tag {
+          display: inline-block;
+          background: rgba(74, 222, 128, 0.1);
+          color: #4ade80;
+          padding: 3px 12px;
+          border-radius: 999px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(74, 222, 128, 0.15);
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        .modal-title {
+          color: #f3f4f6;
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 4px;
+          font-family: 'Space Grotesk', sans-serif;
+          letter-spacing: -0.02em;
+        }
+
+        .modal-description {
+          color: #9ca3af;
+          font-size: 14px;
+          margin-bottom: 24px;
+          line-height: 1.6;
+          margin-top: 4px;
+        }
+
+        .modal-screenshots-section {
+          margin-bottom: 28px;
+        }
+
+        .modal-screenshots-header {
+          color: #d1d5db;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 12px;
+          font-family: 'Space Grotesk', sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+        }
+
+        .modal-accent {
+          color: #7c6df0;
+        }
+
+        .modal-screenshots-counter {
+          font-size: 12px;
+          color: #6b7280;
+          font-weight: 400;
+        }
+
+        .modal-screenshots-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .modal-nav-btn {
+          position: absolute;
+          z-index: 10;
+          background: rgba(18, 18, 30, 0.9);
+          backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #d1d5db;
+          font-size: 20px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          padding: 0;
+        }
+
+        .modal-nav-btn:hover:not(:disabled) {
+          background: rgba(124, 109, 240, 0.2);
+          border-color: rgba(124, 109, 240, 0.3);
+          color: #f3f4f6;
+        }
+
+        .modal-nav-btn:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+
+        .modal-nav-prev {
+          left: -14px;
+        }
+
+        .modal-nav-next {
+          right: -14px;
+        }
+
+        .modal-screenshot-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          width: 100%;
+          overflow: hidden;
+          padding: 4px 0;
+        }
+
+        .modal-screenshot-item {
+          border-radius: 8px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          animation: fadeIn 0.3s ease;
+        }
+
+        .modal-screenshot-item:hover {
+          border-color: rgba(124, 109, 240, 0.3);
+          transform: scale(1.02);
+        }
+
+        .modal-screenshot-item img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          display: block;
+        }
+
+        .modal-dots {
+          display: flex;
+          justify-content: center;
+          gap: 6px;
+          margin-top: 12px;
+        }
+
+        .modal-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-dot.active {
+          background: #7c6df0;
+          box-shadow: 0 0 12px rgba(124, 109, 240, 0.3);
+        }
+
+        .modal-contributions {
+          margin-bottom: 28px;
+        }
+
+        .modal-contributions-header {
+          color: #d1d5db;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          font-family: 'Space Grotesk', sans-serif;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .modal-contributions-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .modal-contribution-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 6px 0;
+          color: #d1d5db;
+          font-size: 14px;
+          line-height: 1.6;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .modal-contribution-item:last-child {
+          border-bottom: none;
+        }
+
+        .modal-contribution-bullet {
+          color: #4ade80;
+          font-size: 16px;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+
+        .modal-tech-section {
+          margin-bottom: 24px;
+        }
+
+        .modal-tech-header {
+          color: #d1d5db;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          font-family: 'Space Grotesk', sans-serif;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .modal-tech-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .modal-tech-tag {
+          background: rgba(124, 109, 240, 0.1);
+          color: #a78bfa;
+          padding: 4px 14px;
+          border-radius: 6px;
+          font-size: 12px;
+          border: 1px solid rgba(124, 109, 240, 0.08);
+          font-family: 'JetBrains Mono', monospace;
+          font-weight: 500;
+        }
+
+        /* ============================================
+           BUTTONS: GitHub + Live Demo
+           ============================================ */
+        .modal-buttons-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+
+        .modal-github-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 24px;
+          background: rgba(255, 255, 255, 0.03);
+          color: #60a5fa;
+          border-radius: 8px;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 500;
+          border: 1px solid rgba(96, 165, 250, 0.08);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .modal-github-link:hover {
+          background: rgba(96, 165, 250, 0.1);
+          border-color: rgba(96, 165, 250, 0.2);
+          transform: translateY(-2px);
+        }
+
+        .modal-live-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 24px;
+          background: rgba(124, 109, 240, 0.1);
+          color: #a78bfa;
+          border-radius: 8px;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 500;
+          border: 1px solid rgba(124, 109, 240, 0.15);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .modal-live-link:hover {
+          background: rgba(124, 109, 240, 0.2);
+          border-color: rgba(124, 109, 240, 0.3);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 20px rgba(124, 109, 240, 0.2);
+        }
+
+        .modal-footer {
+          margin-top: 0px;
+          padding-top: 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.03);
+          color: #374151;
+          font-size: 11px;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .modal-footer-accent {
+          color: #4ade80;
+        }
+
+        .modal-footer-key {
+          color: #fbbf24;
+        }
+
+        .modal-footer-time {
+          color: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+          .modal-screenshot-grid {
+            gap: 8px;
+          }
+          .modal-screenshot-item img {
+            height: 150px;
+          }
+          .modal-nav-btn {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+          }
+          .modal-nav-prev {
+            left: -10px;
+          }
+          .modal-nav-next {
+            right: -10px;
+          }
+          .modal-buttons-wrapper {
+            flex-direction: column;
+          }
+          .modal-github-link,
+          .modal-live-link {
+            justify-content: center;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .modal-screenshot-grid {
+            grid-template-columns: 1fr;
+          }
+          .modal-screenshot-item img {
+            height: 180px;
+          }
+          .modal-nav-prev {
+            left: -8px;
+          }
+          .modal-nav-next {
+            right: -8px;
+          }
+          .modal-body {
+            padding: 20px 16px;
+          }
+          .modal-title {
+            font-size: 22px;
+          }
         }
       `}</style>
     </>

@@ -33,20 +33,32 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="projects-section" ref={sectionRef}>
+    <section 
+      id="projects" 
+      className={`projects-section section-reveal ${isVisible ? 'visible' : ''}`} 
+      ref={sectionRef}
+    >
       <div className="projects-glow"></div>
-      <div className="section-gradient-top"></div>
-      <div className="projects-header">
-        <span className={`projects-label ${isVisible ? 'fade-in-up' : 'fade-out-down'}`}>
-          04. Work
+
+      <div className={`projects-header stagger-children ${isVisible ? 'visible' : ''}`}>
+        <span className="projects-label">
+          <span className="projects-label-number">04.</span> Work
         </span>
-        <h2 className={`projects-title ${isVisible ? 'fade-in-up delay-1' : 'fade-out-down'}`}>
+
+        <h2 className="projects-title">
           Stuff I've actually<br />
-          <span className="projects-highlight">built and shipped</span>
+          <span className="projects-highlight">
+            built and shipped
+            <span className="projects-title-icon">✦</span>
+          </span>
         </h2>
-        <p className={`projects-subtitle ${isVisible ? 'fade-in-up delay-2' : 'fade-out-down'}`}>
-          Each project is a story of problem-solving and learning
-        </p>
+
+        <div className="projects-subtitle-wrapper">
+          <span className="projects-subtitle-line"></span>
+          <p className="projects-subtitle">
+            Each project is a story of problem-solving and learning
+          </p>
+        </div>
       </div>
 
       <div className="projects-carousel-wrapper">
@@ -54,8 +66,6 @@ const Projects = () => {
         <ProjectCarousel projects={projects} />
         <div className="gradient-bottom"></div>
       </div>
-
-      <div className="section-gradient-bottom"></div>
     </section>
   );
 };

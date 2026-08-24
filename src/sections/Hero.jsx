@@ -7,9 +7,9 @@ const Hero = () => {
   const [loopIndex, setLoopIndex] = useState(0);
 
   const roles = ['Frontend Developer', 'Quality Assurance Engineer'];
-  const typingSpeed = 100;
-  const deletingSpeed = 50;
-  const pauseTime = 1500;
+  const typingSpeed = 80;
+  const deletingSpeed = 40;
+  const pauseTime = 2000;
 
   useEffect(() => {
     const currentRole = roles[loopIndex % roles.length];
@@ -38,19 +38,25 @@ const Hero = () => {
   const hasText = displayText.length > 0;
 
   return (
-    <section id="hero" className="hero-section">
+    <section id="hero" className="hero-section section-reveal visible">
       <div className="hero-content">
         <div className="hero-about-grid">
+          {/* Image column — with glow + 3D tilt + floating animation */}
           <div className="hero-image-col">
-            <div className="hero-image-container">
-              <img 
-                src={myImage}
-                alt="John Cedric Acapulco"
-                className="hero-image"
-              />
+            <div className="hero-image-wrapper">
+              <div className="hero-image-container">
+                <img 
+                  src={myImage}
+                  alt="John Cedric Acapulco"
+                  className="hero-image"
+                  loading='lazy'
+                />
+              </div>
+              <div className="hero-image-glow"></div>
             </div>
           </div>
 
+          {/* Info column */}
           <div className="hero-info-col">
             <div className="hero-badge">
               <span className="badge-dot"></span>
@@ -70,33 +76,67 @@ const Hero = () => {
                 {hasText ? `/${'>'}` : ''}
               </span>
             </div>
+            
+            {/* Updated professional tagline */}
             <p className="hero-desc">
-              Building interfaces that don't suck,<br />
-              and testing them until they do.
+              I build clean interfaces and test them<br />
+              until they're bulletproof.
             </p>
+            
             <div className="hero-links">
-              <a href="#projects" className="primary-link">See my work →</a>
-              <a href="/resume/JohnCedricAcapulco-Resume.docx" className="secondary-link">Resume</a>
+              <a href="#projects" className="primary-link">
+                See my work →
+              </a>
+              <a 
+                href="/resume/JohnCedricAcapulco-Resume.docx" 
+                className="secondary-link" 
+                download
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle' }}
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Resume
+              </a>
             </div>
+            
+            {/* Updated meaningful stats */}
             <div className="hero-stats">
               <div className="stat">
-                <span className="stat-num">3+</span>
-                <span className="stat-label">Projects</span>
+                <span className="stat-num">3</span>
+                <span className="stat-label">Projects Shipped</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat">
                 <span className="stat-num">10+</span>
-                <span className="stat-label">Technologies</span>
+                <span className="stat-label">Tech Stack</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat">
-                <span className="stat-num">100%</span>
-                <span className="stat-label">Frontend Developer</span>
+                <span className="stat-num">2</span>
+                <span className="stat-label">Years Experience</span>
               </div>
             </div>
           </div>
 
+          {/* About column — with connector */}
           <div className="about-col">
+            <div className="about-connector">
+              <span className="about-connector-line"></span>
+              <span className="about-connector-text">About me</span>
+            </div>
             <div className="about-label">01. About</div>
             <h2 className="about-title">
               I build & break<br />
@@ -123,9 +163,11 @@ const Hero = () => {
         </div>
       </div>
 
+      {/* Enhanced scroll indicator with bouncing arrow */}
       <div className="hero-scroll">
         <span>Scroll</span>
         <div className="scroll-line"></div>
+        <div className="scroll-arrow">↓</div>
       </div>
     </section>
   );

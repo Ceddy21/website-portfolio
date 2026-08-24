@@ -8,9 +8,9 @@ const GlowCursor = () => {
     if (!glowElement) return;
 
     const handleMouseMove = (e) => {
-      const x = e.clientX - 175;
-      const y = e.clientY - 175;
-      glowElement.style.transform = `translate(${x}px, ${y}px)`;
+      // Position the element's center exactly at the cursor
+      glowElement.style.left = e.clientX + 'px';
+      glowElement.style.top = e.clientY + 'px';
     };
 
     const handleMouseLeave = () => {
@@ -33,29 +33,31 @@ const GlowCursor = () => {
   }, []);
 
   return (
-    <>
-      <div
-        ref={glowRef}
-        style={{
-          position: 'fixed',
-          width: '350px',
-          height: '350px',
-          borderRadius: '50%',
-          background: `radial-gradient(circle at center, 
-            rgba(124, 109, 240, 0.08) 0%, 
-            rgba(124, 109, 240, 0.04) 30%, 
-            rgba(124, 109, 240, 0.015) 55%, 
-            transparent 75%
-          )`,
-          pointerEvents: 'none',
-          zIndex: 9999,
-          transform: 'translate(0px, 0px)',
-          mixBlendMode: 'screen',
-          willChange: 'transform',
-          transition: 'none',
-        }}
-      />
-    </>
+    <div
+      ref={glowRef}
+      style={{
+        position: 'fixed',
+        width: '150px',
+        height: '150px',
+        borderRadius: '50%',
+        background: `radial-gradient(circle at center, 
+          rgba(124, 109, 240, 0.08) 0%, 
+          rgba(124, 109, 240, 0.04) 30%, 
+          rgba(124, 109, 240, 0.015) 55%, 
+          transparent 75%
+        )`,
+        pointerEvents: 'none',
+        zIndex: 9999,
+        // Center the element on the left/top position
+        transform: 'translate(-50%, -50%)',
+        mixBlendMode: 'screen',
+        willChange: 'left, top',
+        transition: 'none',
+        // Reset any default positioning
+        left: 0,
+        top: 0,
+      }}
+    />
   );
 };
 

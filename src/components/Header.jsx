@@ -37,6 +37,7 @@ const Header = () => {
       <nav className="nav-desktop">
         <a href="#hero">Home</a>
         <a href="#skills">Skills</a>
+        <a href="#capabilities">Services</a>
         <a href="#projects">Projects</a>
         <a href="#contact" className="nav-cta">Contact</a>
       </nav>
@@ -55,6 +56,7 @@ const Header = () => {
       <nav className={`nav-mobile ${menuOpen ? 'open' : ''}`}>
         <a href="#hero" onClick={handleNavClick}>Home</a>
         <a href="#skills" onClick={handleNavClick}>Skills</a>
+        <a href="#capabilities" onClick={handleNavClick}>Services</a>
         <a href="#projects" onClick={handleNavClick}>Projects</a>
         <a href="#contact" className="nav-cta" onClick={handleNavClick}>Contact</a>
       </nav>

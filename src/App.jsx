@@ -36,8 +36,8 @@ function App() {
       <main className="page-load">
         <Hero />
         <Skills />
-        <Projects />
         <Service />
+        <Projects />
         <Contact />
       </main>
     </>

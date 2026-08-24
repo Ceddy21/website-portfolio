@@ -120,7 +120,7 @@ const Skills = () => {
 
       <div className={`skills-container stagger-children ${isVisible ? 'visible' : ''}`}>
         <div className="skills-header">
-          <span className="skills-label">02. Skills</span>
+          <span className="skills-label">Skills</span>
           <h2 className="skills-title">
             My <span className="skills-highlight">Tech Stack</span>
           </h2>

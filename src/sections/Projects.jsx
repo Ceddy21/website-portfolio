@@ -42,7 +42,7 @@ const Projects = () => {
 
       <div className={`projects-header stagger-children ${isVisible ? 'visible' : ''}`}>
         <span className="projects-label">
-          <span className="projects-label-number">04.</span> Work
+          <span className="projects-label-number"></span> Work
         </span>
 
         <h2 className="projects-title">

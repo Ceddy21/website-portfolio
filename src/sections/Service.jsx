@@ -53,7 +53,7 @@ const Services = () => {
 
       <div className={`services-container stagger-children ${isVisible ? 'visible' : ''}`}>
         <div className="services-header">
-          <span className="services-label">03. What I Bring</span>
+          <span className="services-label">What I Bring</span>
           <h2 className="services-title">
             How I <span className="services-highlight">Add Value</span>
           </h2>

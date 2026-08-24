@@ -41,7 +41,6 @@ const Hero = () => {
     <section id="hero" className="hero-section section-reveal visible">
       <div className="hero-content">
         <div className="hero-about-grid">
-          {/* Image column — with glow + 3D tilt + floating animation */}
           <div className="hero-image-col">
             <div className="hero-image-wrapper">
               <div className="hero-image-container">
@@ -137,7 +136,7 @@ const Hero = () => {
               <span className="about-connector-line"></span>
               <span className="about-connector-text">About me</span>
             </div>
-            <div className="about-label">01. About</div>
+            <div className="about-label">About</div>
             <h2 className="about-title">
               I build & break<br />
               <span className="about-highlight">things for a living</span>

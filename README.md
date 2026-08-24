@@ -239,25 +239,6 @@ If you found this portfolio helpful or inspiring, please give it a ⭐ on GitHub
 
 ---
 
-## 📸 Screenshots
-
-### Hero Section
-<p align="center">
-  <img src="/images/portfolio/portfolio1.png" alt="Hero Section" width="800">
-</p>
-
-### Projects Carousel
-<p align="center">
-  <img src="/images/portfolio/portfolio2.png" alt="Projects Carousel" width="800">
-</p>
-
-### Project Modal
-<p align="center">
-  <img src="/images/portfolio/portfolio3.png" alt="Project Modal" width="800">
-</p>
-
----
-
 ## 🧩 Credits
 
 | Resource | Link |

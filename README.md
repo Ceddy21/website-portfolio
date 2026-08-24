@@ -166,11 +166,6 @@ This project is deployed on **Vercel**.
 4. Deploy
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Ceddy21/website-portfolio)
-
-### Deploy with Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Ceddy21/website-portfolio)
-
 ---
 
 ## 📝 Adding a New Project

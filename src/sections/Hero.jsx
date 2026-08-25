@@ -76,7 +76,6 @@ const Hero = () => {
               </span>
             </div>
             
-            {/* Updated professional tagline */}
             <p className="hero-desc">
               I build clean interfaces and test them<br />
               until they're bulletproof.
@@ -111,26 +110,26 @@ const Hero = () => {
               </a>
             </div>
             
-            {/* Updated meaningful stats */}
+            {/* ✅ Updated stats with honest labels */}
             <div className="hero-stats">
               <div className="stat">
                 <span className="stat-num">3</span>
-                <span className="stat-label">Projects Shipped</span>
+                <span className="stat-label">Projects Built</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat">
                 <span className="stat-num">10+</span>
-                <span className="stat-label">Tech Stack</span>
+                <span className="stat-label">Tools & Frameworks</span>
               </div>
               <div className="stat-divider"></div>
               <div className="stat">
                 <span className="stat-num">2</span>
-                <span className="stat-label">Years Experience</span>
+                <span className="stat-label">Years of Study</span>
               </div>
             </div>
           </div>
 
-          {/* About column — with connector */}
+          {/* About column */}
           <div className="about-col">
             <div className="about-connector">
               <span className="about-connector-line"></span>
@@ -162,7 +161,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Enhanced scroll indicator with bouncing arrow */}
+      {/* Enhanced scroll indicator */}
       <div className="hero-scroll">
         <span>Scroll</span>
         <div className="scroll-line"></div>

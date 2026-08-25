@@ -303,7 +303,7 @@ section,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 40px 60px;
+  padding: 120px 40px 100px; /* increased bottom padding to avoid scroll overlap */
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -1858,7 +1858,7 @@ section,
 }
 
 @media (max-width: 900px) {
-  .hero-section { padding: 100px 24px 60px; }
+  .hero-section { padding: 100px 24px 100px; } /* increased bottom padding */
   .hero-about-grid { grid-template-columns: 140px 1fr 1fr; gap: 20px; min-height: auto; }
   .hero-image-col { justify-content: flex-start; align-items: flex-start; padding-top: 4px; }
   .hero-image-container { max-width: 140px; }
@@ -1956,6 +1956,11 @@ section,
   .site-header .nav-mobile.open { transform: translateX(0); }
   .site-header .nav-mobile a { font-size: 20px; font-weight: 500; color: var(--text-white); }
   .site-header .nav-mobile .nav-cta { padding: 10px 28px; }
+
+  .hero-section {
+    padding: 80px 20px 120px; /* extra bottom padding on mobile */
+  }
+
   .hero-about-grid {
     grid-template-columns: 1fr;
     grid-template-rows: none;
@@ -1971,7 +1976,13 @@ section,
   .hero-role { justify-content: center; }
   .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
   .hero-links { justify-content: center; }
-  .hero-stats { justify-content: center; }
+  .hero-stats {
+    justify-content: center;
+    margin-bottom: 40px; /* push stats up above scroll */
+    gap: 1rem;
+  }
+  .stat { font-size: 0.75rem; }
+  .stat-num { font-size: 1.1rem; }
   .about-col { grid-column: 1; grid-row: auto; text-align: center; padding-top: 0; }
   .about-tools span { text-align: center; }
   .tools-list { justify-content: center; }
@@ -1988,7 +1999,9 @@ section,
   .site-header.scrolled { padding: 12px 20px; }
   .site-header nav { gap: 16px; }
   .site-header a { font-size: 13px; }
-  .hero-section { padding: 80px 20px 40px; }
+  .hero-section {
+    padding: 80px 20px 120px; /* ensure bottom space */
+  }
   .hero-about-grid { gap: 30px; }
   .hero-image-container { max-width: 180px; }
   .hero-name { font-size: 32px; }
@@ -1997,7 +2010,12 @@ section,
   .role-bracket { font-size: 16px; }
   .hero-desc { font-size: 15px; }
   .hero-links { flex-direction: column; align-items: center; gap: 12px; }
-  .hero-stats { flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
   .stat-divider { display: none; }
   .about-title { font-size: 28px; }
   .about-text { font-size: 14px; }

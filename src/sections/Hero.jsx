@@ -113,15 +113,14 @@ const Hero = () => {
               </a>
             </div>
 
-            {/* ✅ Professional tech stack bar (replaces stats) */}
             <div className="hero-stack">
               <span className="stack-label">Tech stack</span>
               <div className="stack-tags">
                 <span>React</span>
-                <span>TypeScript</span>
+                <span>JavaScript</span>
                 <span>Tailwind</span>
-                <span>Jest</span>
-                <span>Cypress</span>
+                <span></span>
+                <span></span>
               </div>
             </div>
           </div>

@@ -119,8 +119,8 @@ const Hero = () => {
                 <span>React</span>
                 <span>JavaScript</span>
                 <span>Tailwind</span>
-                <span></span>
-                <span></span>
+                {/* <span></span>
+                <span></span> */}
               </div>
             </div>
           </div>

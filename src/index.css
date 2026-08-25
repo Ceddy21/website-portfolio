@@ -303,7 +303,7 @@ section,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 40px 100px; /* increased bottom padding to avoid scroll overlap */
+  padding: 120px 40px 100px;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -480,7 +480,7 @@ section,
   display: flex;
   gap: 18px;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 0px;
   flex-wrap: wrap;
 }
 
@@ -529,19 +529,51 @@ section,
 .secondary-link svg { transition: transform 0.2s ease; }
 .secondary-link:hover svg { transform: translateY(2px); }
 
-.hero-stats {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  padding-top: 24px;
+/* ============================================
+   TECH STACK (Replaces stats)
+   ============================================ */
+.hero-stack {
+  margin-top: 28px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
-  flex-wrap: wrap;
 }
-.stat { display: flex; flex-direction: column; }
-.stat-num { font-size: 22px; font-weight: 700; color: var(--text-white); }
-.stat-label { font-size: 12px; color: var(--text); }
-.stat-divider { width: 1px; height: 28px; background: var(--border); }
 
+.stack-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-tags span {
+  background: var(--bg-card);
+  color: var(--text-light);
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.stack-tags span:hover {
+  border-color: var(--accent);
+  color: var(--text-white);
+  background: rgba(124, 109, 240, 0.08);
+}
+
+/* ============================================
+   ABOUT COLUMN
+   ============================================ */
 .about-col { padding-top: 10px; }
 
 .about-connector {
@@ -602,6 +634,9 @@ section,
   border: 1px solid var(--border);
 }
 
+/* ============================================
+   SCROLL INDICATOR
+   ============================================ */
 .hero-scroll {
   position: absolute;
   bottom: 30px;
@@ -1858,7 +1893,7 @@ section,
 }
 
 @media (max-width: 900px) {
-  .hero-section { padding: 100px 24px 100px; } /* increased bottom padding */
+  .hero-section { padding: 100px 24px 100px; }
   .hero-about-grid { grid-template-columns: 140px 1fr 1fr; gap: 20px; min-height: auto; }
   .hero-image-col { justify-content: flex-start; align-items: flex-start; padding-top: 4px; }
   .hero-image-container { max-width: 140px; }
@@ -1875,9 +1910,6 @@ section,
   .hero-links { justify-content: flex-start; gap: 12px; }
   .primary-link { padding: 9px 18px; font-size: 13px; }
   .secondary-link { font-size: 13px; }
-  .hero-stats { justify-content: flex-start; gap: 14px; padding-top: 16px; }
-  .stat-num { font-size: 17px; }
-  .stat-label { font-size: 10px; }
   .about-col { text-align: left; padding-top: 0; }
   .about-label { font-size: 11px; }
   .about-title { font-size: clamp(18px, 2vw, 22px); margin-bottom: 12px; }
@@ -1896,6 +1928,14 @@ section,
   .hero-scroll { bottom: 20px; }
   .scroll-arrow { font-size: 14px; }
   .hero-badge { animation: none; }
+
+  /* Tech stack on tablet */
+  .hero-stack {
+    text-align: left;
+  }
+  .stack-tags {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1958,7 +1998,7 @@ section,
   .site-header .nav-mobile .nav-cta { padding: 10px 28px; }
 
   .hero-section {
-    padding: 80px 20px 120px; /* extra bottom padding on mobile */
+    padding: 80px 20px 120px;
   }
 
   .hero-about-grid {
@@ -1976,13 +2016,6 @@ section,
   .hero-role { justify-content: center; }
   .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
   .hero-links { justify-content: center; }
-  .hero-stats {
-    justify-content: center;
-    margin-bottom: 40px; /* push stats up above scroll */
-    gap: 1rem;
-  }
-  .stat { font-size: 0.75rem; }
-  .stat-num { font-size: 1.1rem; }
   .about-col { grid-column: 1; grid-row: auto; text-align: center; padding-top: 0; }
   .about-tools span { text-align: center; }
   .tools-list { justify-content: center; }
@@ -1992,6 +2025,14 @@ section,
   .skills-grid,
   .services-grid { grid-template-columns: 1fr; }
   .skills-badges { justify-content: center; }
+
+  /* Tech stack center on mobile */
+  .hero-stack {
+    text-align: center;
+  }
+  .stack-tags {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2000,7 +2041,7 @@ section,
   .site-header nav { gap: 16px; }
   .site-header a { font-size: 13px; }
   .hero-section {
-    padding: 80px 20px 120px; /* ensure bottom space */
+    padding: 80px 20px 120px;
   }
   .hero-about-grid { gap: 30px; }
   .hero-image-container { max-width: 180px; }
@@ -2010,13 +2051,6 @@ section,
   .role-bracket { font-size: 16px; }
   .hero-desc { font-size: 15px; }
   .hero-links { flex-direction: column; align-items: center; gap: 12px; }
-  .hero-stats {
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-  .stat-divider { display: none; }
   .about-title { font-size: 28px; }
   .about-text { font-size: 14px; }
   .skills-section,

@@ -41,6 +41,7 @@ const Hero = () => {
     <section id="hero" className="hero-section section-reveal visible">
       <div className="hero-content">
         <div className="hero-about-grid">
+          {/* Image column */}
           <div className="hero-image-col">
             <div className="hero-image-wrapper">
               <div className="hero-image-container">
@@ -48,7 +49,7 @@ const Hero = () => {
                   src={myImage}
                   alt="John Cedric Acapulco"
                   className="hero-image"
-                  loading='lazy'
+                  loading="lazy"
                 />
               </div>
               <div className="hero-image-glow"></div>
@@ -59,7 +60,7 @@ const Hero = () => {
           <div className="hero-info-col">
             <div className="hero-badge">
               <span className="badge-dot"></span>
-              Available for work
+              Open to opportunities
             </div>
             <h1 className="hero-name">
               John Cedric<br />
@@ -76,14 +77,16 @@ const Hero = () => {
               </span>
             </div>
             
+            {/* Professional description */}
             <p className="hero-desc">
-              I build clean interfaces and test them<br />
-              until they're bulletproof.
+              Frontend developer with a focus on quality. I build accessible, 
+              performant interfaces and rigorously test every component to 
+              ensure a seamless user experience.
             </p>
             
             <div className="hero-links">
               <a href="#projects" className="primary-link">
-                See my work →
+                View my work →
               </a>
               <a 
                 href="/resume/JohnCedricAcapulco-Resume.docx" 
@@ -109,22 +112,16 @@ const Hero = () => {
                 Resume
               </a>
             </div>
-            
-            {/* ✅ Updated stats with honest labels */}
-            <div className="hero-stats">
-              <div className="stat">
-                <span className="stat-num">3</span>
-                <span className="stat-label">Projects Built</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat">
-                <span className="stat-num">10+</span>
-                <span className="stat-label">Tools & Frameworks</span>
-              </div>
-              <div className="stat-divider"></div>
-              <div className="stat">
-                <span className="stat-num">2</span>
-                <span className="stat-label">Years of Study</span>
+
+            {/* ✅ Professional tech stack bar (replaces stats) */}
+            <div className="hero-stack">
+              <span className="stack-label">Tech stack</span>
+              <div className="stack-tags">
+                <span>React</span>
+                <span>TypeScript</span>
+                <span>Tailwind</span>
+                <span>Jest</span>
+                <span>Cypress</span>
               </div>
             </div>
           </div>
@@ -141,27 +138,27 @@ const Hero = () => {
               <span className="about-highlight">things for a living</span>
             </h2>
             <p className="about-text">
-              BSIT grad who actually enjoys what they do. I make websites that 
-              look good and work even better — then I test them until I find 
-              something that doesn't.
+              BSIT graduate with a dual passion for frontend development and 
+              quality assurance. I create interfaces that are both beautiful 
+              and robust — then test them until they're bulletproof.
             </p>
             <p className="about-text">
-              Some people code, some people test. I do both. Because shipping 
-              broken code is just not my vibe.
+              I believe shipping code without thorough testing is just 
+              gambling with user trust. That's why I do both.
             </p>
             <div className="about-tools">
-              <span>Currently obsessed with:</span>
+              <span>Currently focused on:</span>
               <div className="tools-list">
                 <span>React</span>
                 <span>Tailwind</span>
-                <span>Frontend Development</span>
+                <span>Frontend Testing</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced scroll indicator */}
+      {/* Scroll indicator */}
       <div className="hero-scroll">
         <span>Scroll</span>
         <div className="scroll-line"></div>
